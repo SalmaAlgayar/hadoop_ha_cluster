@@ -1,0 +1,86 @@
+version: "3.9"
+
+services:
+  master1:
+    image: salmagyr/rock:1.1
+    container_name: master1
+    hostname: node01
+    ports:
+      - "8481:8480"
+      - "9871:9870"
+      - "8081:8088"
+    command: ["bash", "-c", "/scripts/my_master.sh && tail -f /dev/null"]
+    volumes:
+      - ./shared:/shared
+    networks:
+      mycluster-network:
+        aliases:
+          - node01
+
+  master2:
+    image: salmagyr/rock:1.1
+    container_name: master2
+    hostname: node02
+    ports:
+      - "8482:8480"
+      - "9872:9870"
+      - "8082:8088"
+    command: ["bash", "-c", "/scripts/my_master.sh && tail -f /dev/null"]
+    volumes:
+      - ./shared:/shared
+    networks:
+      mycluster-network:
+        aliases:
+          - node02
+
+  zk_journal:
+    image: salmagyr/rock:1.1
+    container_name: zk_journal
+    hostname: node03
+    ports:
+      - "8483:8480"
+      - "9873:9870"
+      - "8083:8088"
+    command: ["bash", "-c", "/scripts/my_zk_journal.sh && tail -f /dev/null"]
+    volumes:
+      - ./shared:/shared
+    networks:
+      mycluster-network:
+        aliases:
+          - node03
+
+  worker1:
+    image: salmagyr/rock:1.1
+    container_name: worker1
+    hostname: node04
+    ports:
+      - "8484:8480"
+      - "9874:9870"
+      - "8084:8088"
+    command: ["bash", "-c", "/scripts/my_worker.sh && tail -f /dev/null"]
+    volumes:
+      - ./shared:/shared
+    networks:
+      mycluster-network:
+        aliases:
+          - node04
+
+  worker2:
+    image: salmagyr/rock:1.1
+    container_name: worker2
+    hostname: node05
+    ports:
+      - "8485:8480"
+      - "9875:9870"
+      - "8085:8088"
+    command: ["bash", "-c", "/scripts/my_worker.sh && tail -f /dev/null"]
+    volumes:
+      - ./shared:/shared
+    networks:
+      mycluster-network:
+        aliases:
+          - node05
+
+networks:
+  mycluster-network:
+    driver: bridge
