@@ -1,2 +1,3 @@
 # hadoop_ha_cluster
-<img width="1920" height="1080" alt="NameNode" src="https://github.com/user-attachments/assets/0ada3163-3564-465a-a0cd-853d91fde556" />
+
+![NameNode (1920 x 1200 px)](https://github.com/user-attachments/assets/458f9572-1beb-47d5-a172-85f029e28d40)
